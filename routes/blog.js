@@ -18,8 +18,7 @@ router.get("/categories", getAllCategories);
 
 router.delete("/delete-blog/:blogId/:userId", isSignedIn, isAuthenticated, deleteBlog);
 
-// TODO: test it
-router.put("/updateBlog/:blogId/:userId", isSignedIn, isAuthenticated, updateBlog)
+router.put("/update-blog/:blogId/:userId", isSignedIn, isAuthenticated, updateBlog)
 
 
 module.exports = router;

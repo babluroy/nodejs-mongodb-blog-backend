@@ -31,7 +31,7 @@ const userSchema = new mongoose.Schema({
         default: [],
     }
   },
-  {timeseries: true}
+  {timestamps: true}
 )
 
 
