@@ -20,6 +20,14 @@ const blogSchema = mongoose.Schema({
         type: String,
         maxlength: 500,
     },
+    featured: {
+        type: Boolean,
+        default: false,
+    },
+    highlighted: {
+        type: Boolean,
+        default: false,
+    }
  },
     {timestamps: true}
  )
