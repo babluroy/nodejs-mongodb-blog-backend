@@ -57,7 +57,6 @@ exports.signin = (req, res) => {
 
     bcrypt.compare(password, user.password).then((isCorrect) => {
       if(isCorrect){
-        console.log("CORRECT")
         const payload = {
           id: user.id,
           email: user.email, 
@@ -67,9 +66,12 @@ exports.signin = (req, res) => {
           process.env.SECRET,
           { expiresIn: 3600 },
           (err, token) => {
+            const {name, role, email} = user;
             res.json({
-              success: true,
               token: "Bearer " + token,
+              name: name,
+              role: role,
+              email: email,
             });
             if (err) {
               res.json({
