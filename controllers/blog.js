@@ -161,6 +161,40 @@ exports.updateBlog = (req, res) => {
     })
 }
 
+exports.getHighlightedBlogs = (req,res) => {
+    let sortBy = req.query.sortBy ? req.query.sortBy : "_id";
+    Blog
+    .find({highlighted: true})
+    .populate("category")
+    .sort([[sortBy, "asc"]])
+    .limit(5)
+    .exec((err, blogs) => {
+        if(err){
+            return res.status(400).json({
+                error: "No highlighted blogs found"
+            })
+        }
+        res.status(200).json(blogs);
+    })
+}
+
+exports.getFeaturedBlogs = (req,res) => {
+    let sortBy = req.query.sortBy ? req.query.sortBy : "_id";
+    Blog
+    .find({featured: true})
+    .populate("category")
+    .sort([[sortBy, "asc"]])
+    .limit(5)
+    .exec((err, blogs) => {
+        if(err){
+            return res.status(400).json({
+                error: "No featured blogs found"
+            })
+        }
+        res.status(200).json(blogs);
+    })
+}
+
 const uploadFile = async (path, filename) => {
     return storageRef.upload(path, {
         public: true,
