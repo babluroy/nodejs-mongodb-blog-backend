@@ -8,7 +8,7 @@ const {createBlog, getAllBlogs, getBlogById, getBlog, getAllCategories, deleteBl
 router.param("userId", getUserById);
 router.param("blogId", getBlogById);
 
-router.post("/create-blog/:userId", isSignedIn, isAuthenticated, createBlog);
+router.post("/create-blog/:userId", isSignedIn, isAdmin, isAuthenticated, createBlog);
 
 router.get("/all-blogs", getAllBlogs);
 
@@ -16,9 +16,9 @@ router.get("/blog/:blogId", getBlog);
 
 router.get("/categories", getAllCategories);
 
-router.delete("/delete-blog/:blogId/:userId", isSignedIn, isAuthenticated, deleteBlog);
+router.delete("/delete-blog/:blogId/:userId", isSignedIn, isAdmin, isAuthenticated, deleteBlog);
 
-router.put("/update-blog/:blogId/:userId", isSignedIn, isAuthenticated, updateBlog);
+router.put("/update-blog/:blogId/:userId", isSignedIn, isAdmin, isAuthenticated, updateBlog);
 
 router.get("/hightlighted-blogs", getHighlightedBlogs);
 

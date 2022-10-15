@@ -55,7 +55,7 @@ exports.createBlog = (req,res) => {
 exports.getAllBlogs = (req,res) => {
     let { pageNumber, limit } = req.query;
     if (!pageNumber) pageNumber = 1;
-    if (!limit) limit = 9;
+    if (!limit || limit > 100) limit = 9;
     const limit_query = parseInt(limit);
     const skip = (pageNumber - 1) * limit;
     // let limit = req.query.limit ? parseInt(req.query.limit) : 5;
