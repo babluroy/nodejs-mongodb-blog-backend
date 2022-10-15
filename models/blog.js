@@ -16,9 +16,13 @@ const blogSchema = mongoose.Schema({
         type: String,
         required: true,
     },
+    shortDesc: {
+        type: String,
+        required: true,
+        maxlength: 80,
+    },
     desc: {
         type: String,
-        maxlength: 500,
     },
     featured: {
         type: Boolean,
