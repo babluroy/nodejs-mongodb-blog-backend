@@ -63,7 +63,7 @@ exports.getAllBlogs = (req,res) => {
     Blog
     .find()
     .populate("category")
-    .sort([[sortBy, "asc"]])
+    .sort([[sortBy, "desc"]])
     .skip(skip)
     .limit(limit_query)
     .exec((err, blogs) => {
@@ -172,7 +172,7 @@ exports.getHighlightedBlogs = (req,res) => {
     Blog
     .find({highlighted: true})
     .populate("category")
-    .sort([[sortBy, "asc"]])
+    .sort([[sortBy, "desc"]])
     .limit(5)
     .exec((err, blogs) => {
         if(err){
@@ -189,7 +189,7 @@ exports.getFeaturedBlogs = (req,res) => {
     Blog
     .find({featured: true})
     .populate("category")
-    .sort([[sortBy, "asc"]])
+    .sort([[sortBy, "desc"]])
     .limit(5)
     .exec((err, blogs) => {
         if(err){
