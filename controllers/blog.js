@@ -53,34 +53,19 @@ exports.createBlog = (req,res) => {
 }
 
 exports.getAllBlogs = (req,res) => {
-    const pageNumber = parseInt(req.query.pageNumber) || 0;
-    const limit = parseInt(req.query.limit) || 9;
-    const result = {};
-    const totalPosts = Blog.countDocuments().exec();
-    let startIndex = pageNumber * limit;
-    const endIndex = (pageNumber + 1) * limit;
-    result.totalPosts = totalPosts;
-
-    if (startIndex > 0) {
-        result.previous = {
-          pageNumber: pageNumber - 1,
-          limit: limit,
-        };
-      }
-      if (endIndex < (Blog.countDocuments().exec())) {
-        result.next = {
-          pageNumber: pageNumber + 1,
-          limit: limit,
-        };
-      }
+    let { pageNumber, limit } = req.query;
+    if (!pageNumber) pageNumber = 1;
+    if (!limit) limit = 9;
+    const limit_query = parseInt(limit);
+    const skip = (pageNumber - 1) * limit;
     // let limit = req.query.limit ? parseInt(req.query.limit) : 5;
     let sortBy = req.query.sortBy ? req.query.sortBy : "_id";
     Blog
     .find()
     .populate("category")
     .sort([[sortBy, "asc"]])
-    .skip(startIndex)
-    .limit(limit)
+    .skip(skip)
+    .limit(limit_query)
     .exec((err, blogs) => {
         if(err){
             return res.status(400).json({
