@@ -66,12 +66,13 @@ exports.signin = (req, res) => {
           process.env.SECRET,
           { expiresIn: 3600 },
           (err, token) => {
-            const {name, role, email} = user;
+            const {name, role, email, _id} = user;
             res.json({
               token: "Bearer " + token,
               name: name,
               role: role,
               email: email,
+              _id: _id,
             });
             if (err) {
               res.json({
