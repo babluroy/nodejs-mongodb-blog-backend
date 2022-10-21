@@ -138,7 +138,6 @@ exports.updateBlog = (req, res) => {
         let blog = req.blog;
         blog = _.extend(blog, fields);
         
-        if(file.image) {
 
         if(file.image) {
             if(file.image.size > 5000000){
@@ -155,15 +154,15 @@ exports.updateBlog = (req, res) => {
                   var imageUrl = isFileUploaded[0].metadata.mediaLink;
                   blog.image = imageUrl;
                 }
-
+            }
+            
                 blog.save((err, blog)=>{
                     if(err) {
                         return res.status(400).json({error: "Error while saving data"});
                     }
-                    return res.status(400).json({success: "Successfully updated the blog"});
+                    return res.status(200).json({success: "Successfully updated the blog"});
                 })
-            }
-        }
+
     })
 }
 
