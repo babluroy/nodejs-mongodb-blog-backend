@@ -2,11 +2,24 @@ var express = require("express");
 var router = express.Router();
 const {isSignedIn,isAuthenticated, isAdmin} = require("../controllers/auth")
 const {getUserById} = require("../controllers/user")
-const {createBlog, getAllBlogs, getBlogById, getBlog, getAllCategories, deleteBlog, updateBlog, getHighlightedBlogs, getFeaturedBlogs} = require("../controllers/blog")
+const {
+       createBlog,
+       getAllBlogs,
+       getBlogById, 
+       getBlog,
+       getAllCategories, 
+       deleteBlog, 
+       updateBlog, 
+       getHighlightedBlogs, 
+       getFeaturedBlogs, 
+       getBlogsByCategories,
+       returnBlogsByCategories,
+    } = require("../controllers/blog")
 
 // params
 router.param("userId", getUserById);
 router.param("blogId", getBlogById);
+router.param("categoryId", getBlogsByCategories)
 
 router.post("/create-blog/:userId", isSignedIn, isAdmin, isAuthenticated, createBlog);
 
@@ -24,5 +37,6 @@ router.get("/hightlighted-blogs", getHighlightedBlogs);
 
 router.get("/featured-blogs", getFeaturedBlogs);
 
+router.get("/get-blogs-by-categories/:categoryId",  returnBlogsByCategories);
 
 module.exports = router;

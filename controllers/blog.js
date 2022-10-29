@@ -200,6 +200,34 @@ exports.getFeaturedBlogs = (req,res) => {
     })
 }
 
+exports.getBlogsByCategories = (req, res, next, id) => {
+    let { pageNumber, limit } = req.query;
+    if (!pageNumber) pageNumber = 1;
+    if (!limit || limit > 100) limit = 9;
+    const limit_query = parseInt(limit);
+    const skip = (pageNumber - 1) * limit;
+    let sortBy = req.query.sortBy ? req.query.sortBy : "_id";
+    Blog.find({category: id})
+    .populate("category")
+    .sort([[sortBy, "desc"]])
+    .skip(skip)
+    .limit(limit_query)
+    .exec((err, blogs) => {
+        if(err){
+            return res.status(400).json({
+                error: "No blogs found"
+            })
+        }
+        req.blogs = blogs;
+        next()
+    })
+}
+
+exports.returnBlogsByCategories = (req,res) => {
+    res.status(200).json(req.blogs)
+}
+
+
 const uploadFile = async (path, filename) => {
     return storageRef.upload(path, {
         public: true,
