@@ -1,5 +1,5 @@
 
-## Blog : Node.js MongoDB Backend with firebase storage
+## Node.js MongoDB Backend
 ## Installation
 
 ### Step 1 :
@@ -25,5 +25,5 @@ Name of the file should be firebaseServiceAccount.json
 
 ## Postman Collection
 
-[Download](https://drive.google.com/file/d/1NM6N0rukxFmAmDea_GH9s3e0yEPCFcJN/view?usp=sharing)
+[View](https://red-star-650512.postman.co/workspace/My-Workspace~3291c60c-0b71-4a05-8224-df72afed0053/collection/13677518-29e40aa4-1878-464a-8e77-29309ed52511?action=share&creator=13677518)
 
