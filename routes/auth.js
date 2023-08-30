@@ -19,6 +19,9 @@ router.post('/signin',
 ],
 signin
 )
+
+router.post('/is-authenticated',isAuthenticated)
+
 router.get('/signout', signout);
 
 module.exports = router;

@@ -103,11 +103,20 @@ exports.signout = (req, res) => {
   });
 }
 
-exports.isSignedIn = expressjwt({
-  secret: process.env.SECRET,
-  algorithms: ["sha1", "RS256", "HS256"],
-  userProperty: "auth",
-});
+exports.isSignedIn = (req, res, next) => {
+  const secret = process.env.SECRET;
+  const token = req.headers.authorization ? req.headers.authorization.split(' ')[1] : null;
+  if (!token) {
+    return res.status(401).json({ error: 'Unauthorized - Missing JWT' });
+  }
+  jwt.verify(token, secret, { algorithms: ["sha1", "RS256", "HS256"] }, (err, decoded) => {
+    if (err) {
+      return res.status(401).json({ error: 'Unauthorized - Invalid JWT' });
+    }
+    req.auth = decoded;
+    next();
+  });
+}
 
 exports.isAuthenticated = (req, res, next) => {
   let checker = req.profile && req.auth && req.profile._id == req.auth.id;
