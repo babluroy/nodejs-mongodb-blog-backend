@@ -4,8 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
-    "build": "netlify deploy --prod"
+    "start": "node app.js"
   },
   "author": "Bablu Roy",
   "license": "ISC",

@@ -7,7 +7,6 @@ const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const firebaseAdmin = require("firebase-admin");
 const serviceAccount = require("./utils/firebaseServiceAccount.json");
-const router = express.Router();
 
 // firebase initialize
 firebaseAdmin.initializeApp({
